@@ -1,0 +1,67 @@
+{
+  "projectName": "Teste",
+  "version": "0.0.1",
+  "dev": {
+    "database": {
+      "database": "teste01",
+      "dialect": "mysql",
+      "username": "teste01",
+      "password": "!Q@W#E$R5t",
+      "host": "127.0.0.1",
+      "forceSync": true
+    },
+    "server": {
+      "port": 3000,
+      "token": "abcde12345",
+      "host": "127.0.0.1",
+      "routePrefix": "/api",
+      "plugins": [
+        "swagger"
+      ],
+      "hostSwagger": "127.0.0.1:3000",
+      "scheme": "http"
+    }
+  },
+  "prod": {
+    "database": {
+      "database": "teste01",
+      "dialect": "mysql",
+      "username": "teste01",
+      "password": "!Q@W#E$R5t",
+      "host": "127.0.0.1",
+      "forceSync": true
+    },
+    "server": {
+      "port": 3000,
+      "token": "fghij67890",
+      "host": "0.0.0.0",
+      "routePrefix": "/api",
+      "plugins": [
+        "swagger"
+      ],
+      "hostSwagger": "127.0.0.1:3000",
+      "scheme": "http"
+    }
+  },
+  "test": {
+    "database": {
+      "database": "teste01",
+      "dialect": "mysql",
+      "username": "teste01",
+      "password": "!Q@W#E$R5t",
+      "host": "127.0.0.1",
+      "forceSync": true
+    },
+    "server": {
+      "port": 3000,
+      "token": "abcde12345",
+      "host": "0.0.0.0",
+      "routePrefix": "/api",
+      "plugins": [
+        "swagger"
+      ],
+      "hostSwagger": "127.0.0.1:3000",
+      "scheme": "http"
+    }
+  }
+}
