@@ -29,7 +29,7 @@
       "username": "teste01",
       "password": "!Q@W#E$R5t",
       "host": "127.0.0.1",
-      "forceSync": true
+      "forceSync": false
     },
     "server": {
       "port": 3000,

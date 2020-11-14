@@ -1,13 +1,10 @@
 import {Column, DataType, Table} from "sequelize-typescript";
-import {AbstractModel, IAbstractModel} from '../../common/model/AbstractModel';
+import {AbstractModel, IAbstractModel} from '../../../common/model/AbstractModel';
 
-@Table({tableName:'tabulacao', modelName: 'Tabulacao'})
+@Table({tableName:'tabulacoes', modelName: 'Tabulacao'})
 export class Tabulacao extends AbstractModel<Tabulacao> implements  ITabulacao {
 
-    @Column({field:'id', type: DataType.INTEGER, primaryKey:true, allowNull: false, autoIncrement:true})
-    tabulacaoId: number;
-
-    @Column({allowNull: false, field: 'nome_cliente'})
+    @Column({allowNull: false, field: 'nome_cliente', type: DataType.TEXT})
     nomeCliente: string;
 
     @Column({allowNull: false, field: 'protocolo'})
@@ -17,19 +14,17 @@ export class Tabulacao extends AbstractModel<Tabulacao> implements  ITabulacao {
     dataAtendimento: Date;
 
     @Column({allowNull: false, field: 'numero_binado'})
-    numeroBinado: Date;
+    numeroBinado: string;
 
     @Column({allowNull: false, field: 'numero_acesso'})
-    numeroAcesso: Date;
+    numeroAcesso: string;
 
 }
 
 export interface ITabulacao extends  IAbstractModel {
-
-    tabulacaoId: number;
     nomeCliente: string;
     protocolo: string;
     dataAtendimento: Date;
-    numeroBinado: Date;
-    numeroAcesso: Date;
+    numeroBinado: string;
+    numeroAcesso: string;
 }

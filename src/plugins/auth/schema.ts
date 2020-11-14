@@ -4,7 +4,7 @@
 
 'use strict';
 
-import {UnauthorizedError} from "../../app/common/error/UnauthorizedError";
+import {UnauthorizedError} from "../../common/error/UnauthorizedError";
 
 const Hoek = require('@hapi/hoek');
 

@@ -24,7 +24,6 @@ export interface IServerSettings {
     scheme: string;
 }
 
-
 export interface IDatabaseSetting {
     database: string;
     dialect: string;

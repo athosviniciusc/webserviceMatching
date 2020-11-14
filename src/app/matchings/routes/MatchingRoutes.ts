@@ -7,7 +7,7 @@ import {MatchingValidator} from "../validator/MatchingValidator";
 
 export default function (server: Hapi.server, settings: IServerSettings, sequelize: Sequelize) {
 
-    const facade = new MatchingFacade(settings, sequelize, MatchingController.getInstance(settings, sequelize));
+    const facade = new MatchingFacade(settings, sequelize, MatchingController.getInstance(server, settings, sequelize));
     server.bind(facade);
 
     server.route({
@@ -71,6 +71,37 @@ export default function (server: Hapi.server, settings: IServerSettings, sequeli
 
     server.route({
         method: 'GET',
+        path: '/matching/find/{id}',
+        config: {
+            auth: 'simple',
+            plugins: {
+                'hapiAuthorization': {
+                    roles: ['VIEW_MATCHINGS']
+                },
+                'hapi-swagger': {
+                    responses: {
+                        '400': {
+                            'description': 'BadRequest'
+                        }
+                    }
+                }
+            },
+            response: {
+                schema: MatchingValidator.matching
+            },
+            description: 'Localizar matchings por id',
+            notes: 'Serviço para localizar matchings por id',
+            tags: ['api'], // ADD THIS TAG
+            validate: {
+                headers: MatchingValidator.autorization,
+                params: MatchingValidator.byId
+            },
+            handler: facade.findById
+        }
+    });
+
+    server.route({
+        method: 'GET',
         path: '/matching/list',
         config: {
             auth: 'simple',
@@ -127,5 +158,4 @@ export default function (server: Hapi.server, settings: IServerSettings, sequeli
             handler: facade.delete
         }
     });
-
 }

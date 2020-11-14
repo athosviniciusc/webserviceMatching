@@ -7,7 +7,7 @@ import {TabulacaoValidator} from "../../tabulacao/validator/TabulacaoValidator";
 
 export default function (server: Hapi.server, settings: IServerSettings, sequelize: Sequelize) {
 
-    const facade = new TabulacaoFacade(settings, sequelize, TabulacaoController.getInstance(settings, sequelize));
+    const facade = new TabulacaoFacade(settings, sequelize, TabulacaoController.getInstance(server, settings, sequelize));
     server.bind(facade);
 
     server.route({
@@ -69,7 +69,36 @@ export default function (server: Hapi.server, settings: IServerSettings, sequeli
         }
     });
 
-
+    server.route({
+        method: 'GET',
+        path: '/tabulacao/find/{id}',
+        config: {
+            auth: 'simple',
+            plugins: {
+                'hapiAuthorization': {
+                    roles: ['VIEW_TABULACOES']
+                },
+                'hapi-swagger': {
+                    responses: {
+                        '400': {
+                            'description': 'BadRequest'
+                        }
+                    }
+                }
+            },
+            response: {
+                schema: TabulacaoValidator.tabulacao
+            },
+            description: 'Localizar tabulacao por id',
+            notes: 'Serviço para localizar tabulacao por id',
+            tags: ['api'], // ADD THIS TAG
+            validate: {
+                headers: TabulacaoValidator.autorization,
+                params: TabulacaoValidator.byId
+            },
+            handler: facade.findById
+        }
+    });
 
     server.route({
         method: 'GET',

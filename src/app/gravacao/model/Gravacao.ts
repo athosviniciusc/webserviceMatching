@@ -1,15 +1,11 @@
-import {Column, DataType, Table} from "sequelize-typescript";
-import {AbstractModel, IAbstractModel} from '../../common/model/AbstractModel';
+import {Column, Table} from "sequelize-typescript";
+import {AbstractModel, IAbstractModel} from '../../../common/model/AbstractModel';
 
-@Table({tableName:'gravacao', modelName: 'Gravacao'})
+@Table({tableName:'gravacoes', modelName: 'Gravacao'})
 export class Gravacao extends AbstractModel<Gravacao> implements  IGravacao {
-
-    @Column({field:'id', type: DataType.INTEGER, primaryKey:true, allowNull: false, autoIncrement:true})
-    gravacaoId: number;
 
     @Column({allowNull: false, field: 'telefone'})
     telefone: string;
-
 
     @Column({allowNull: false, field: 'ramal'})
     ramal: string;
@@ -19,9 +15,7 @@ export class Gravacao extends AbstractModel<Gravacao> implements  IGravacao {
 
 }
 
-
 export interface IGravacao extends  IAbstractModel {
-    gravacaoId: number;
     telefone: string;
     ramal: string;
     dataGravacao: Date;

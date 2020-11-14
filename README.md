@@ -1,29 +1,30 @@
-# CRUD-Manufacturer
+# WebServiceMatching
 
 You can also:
   - Import and save files from GitHub
 
 ### Tech
 
-CRUD-Manufacturer uses a number of open source projects to work properly:
+The project uses a series of open source projects to work correctly:
 
 * [node.js] - evented I/O for the backend
 * [Hapi] - build powerful, scalable applications, with minimal overhead and full out-of-the-box functionality
 * [Gulp] - the streaming build system
 * [sequelize] - sequelize is a promise-based Node.js ORM
-* [sqlite3] - a small, fast, self-contained, high-reliability, full-featured, SQL database engine
+* [Mysql] - a small, fast, self-contained, high-reliability, full-featured, SQL database engine
+* [Workbench] - a small, fast, self-contained, high-reliability, full-featured, SQL database engine
 
-And of course Wilton O. Ferreira itself is open source with a [public repository][wof]
- on GitHub.
 
 ### Installation
 
-CRUD-Manufacturer requires [Node.js](https://nodejs.org/) v12+ to run.
+WebServiceMatching requires [Node.js](https://nodejs.org/) v12+ to run.
+
+X-API-KEY = abcde12345
 
 Install the dependencies and devDependencies and start the server.
 
 ```sh
-$ cd crud-manufacturer
+$ cd webserviceMatching
 $ npm install
 $ node run start
 ```
@@ -49,7 +50,7 @@ Rest API documentation http://127.0.0.1:3000/docs
 
 Want to contribute? Great!
 
-CRUD-Manufacturer uses Gulp for fast developing.
+WebServiceMatching uses Gulp for fast developing.
 Make a change in your file and instantaneously see your updates!
 
 Open your favorite Terminal and run these commands.
@@ -70,13 +71,6 @@ For production release:
 $ npm run build
 ```
 
-### Todos
-
- - Write MORE Tests
- - Tests another databases
- - Implements JWT Autentication
- - Implements Schema Authorization with roles
- 
 License
 ----
 
@@ -92,4 +86,5 @@ MIT
    [hapi]: <https://hapi.dev/api/>
    [Gulp]: <http://gulpjs.com>
    [sequelize]: <https://sequelize.org/>
-   [sqlite3]: <https://www.sqlite.org/version3.html>
+   [Mysql]: <https://dev.mysql.com/downloads/mysql/>
+   [Workbench]: <https://dev.mysql.com/downloads/workbench/>

@@ -1,38 +1,31 @@
 import {Column, DataType, Table} from "sequelize-typescript";
 import {BelongsTo, ForeignKey} from "sequelize-typescript";
-import {AbstractModel, IAbstractModel} from '../../common/model/AbstractModel';
-import {UUID} from "sequelize";
+import {AbstractModel, IAbstractModel} from '../../../common/model/AbstractModel';
 import {Gravacao} from "../../gravacao/model/Gravacao";
 import {Tabulacao} from "../../tabulacao/model/Tabulacao";
 
-@Table({tableName:'matching', modelName: 'Matching'})
+@Table({tableName:'matchings', modelName: 'Matching'})
 export class Matching extends AbstractModel<Matching> implements  IMatching {
 
-    @Column({field:'id', type: DataType.INTEGER, primaryKey:true, allowNull: false, autoIncrement:true})
-    matchingId: number;
-
-    @BelongsTo(() => Gravacao)
-    gravacao: Gravacao;
-
     @ForeignKey(() => Gravacao)
-    @Column({field:'gravacao_id', type: DataType.INTEGER})
+    @Column({field:'gravacao_id', type: DataType.INTEGER, unique: true})
     gravacaoId: number;
 
-    @BelongsTo(() => Tabulacao)
-    tabulacao: Tabulacao;
+    @BelongsTo(() => Gravacao, { foreignKey: { allowNull: false } })
+    gravacao: Gravacao;
 
     @ForeignKey(() => Tabulacao)
-    @Column({field:'tabulacao_id', type: DataType.INTEGER})
+    @Column({field:'tabulacao_id', type: DataType.INTEGER, unique: true})
     tabulacaoId: number;
+
+    @BelongsTo(() => Tabulacao, { foreignKey: { allowNull: false } })
+    tabulacao: Tabulacao;
 
 }
 
-
-
 export interface IMatching extends  IAbstractModel {
-    matchingId: number;
-    gravacao: Gravacao;
     gravacaoId: number;
-    tabulacao: Tabulacao;
+    gravacao: Gravacao;
     tabulacaoId: number;
+    tabulacao: Tabulacao;
 }

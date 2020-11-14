@@ -5,10 +5,9 @@ import {GravacaoController} from "../controller/GravacaoController";
 import {GravacaoFacade} from "../facade/GravacaoFacade";
 import {GravacaoValidator} from "../validator/GravacaoValidator";
 
-
 export default function (server: Hapi.server, settings: IServerSettings, sequelize: Sequelize) {
 
-    const facade = new GravacaoFacade(settings, sequelize, GravacaoController.getInstance(settings, sequelize));
+    const facade = new GravacaoFacade(settings, sequelize, GravacaoController.getInstance(server, settings, sequelize));
     server.bind(facade);
 
     server.route({
@@ -20,6 +19,7 @@ export default function (server: Hapi.server, settings: IServerSettings, sequeli
             tags: ['api', "gravacao"], // ADD THIS TAG
             description: 'Criar gravacao',
             validate: {
+                headers: GravacaoValidator.autorization,
                 payload: GravacaoValidator.gravacao
             },
             plugins: {
@@ -69,6 +69,36 @@ export default function (server: Hapi.server, settings: IServerSettings, sequeli
         }
     });
 
+    server.route({
+        method: 'GET',
+        path: '/gravacao/find/{id}',
+        config: {
+            auth: 'simple',
+            plugins: {
+                'hapiAuthorization': {
+                    roles: ['VIEW_GRAVACAO']
+                },
+                'hapi-swagger': {
+                    responses: {
+                        '400': {
+                            'description': 'BadRequest'
+                        }
+                    }
+                }
+            },
+            response: {
+                schema: GravacaoValidator.gravacao
+            },
+            description: 'Localizar gravacao por id',
+            notes: 'Serviço para localizar gravacao por id',
+            tags: ['api'], // ADD THIS TAG
+            validate: {
+                headers: GravacaoValidator.autorization,
+                params: GravacaoValidator.byId
+            },
+            handler: facade.findById
+        }
+    });
 
     server.route({
         method: 'GET',
@@ -95,6 +125,7 @@ export default function (server: Hapi.server, settings: IServerSettings, sequeli
             tags: ['api'], // ADD THIS TAG
             validate: {
                 headers: GravacaoValidator.autorization,
+                query: GravacaoValidator.paginationInput
             },
             handler: facade.list
         }
